@@ -1,0 +1,23 @@
+name: Build and Publish Image to Docker Hub
+on:
+  push:
+    branches:
+    - 'feat/ghaSetup'
+    paths:
+    - 'bevangelista-website/Dockerfile'
+  pull_request:
+    paths:
+    - 'bevangelista-website/Dockerfile'
+
+jobs:
+  publish_images:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+      - name: Build Image
+        run: docker build ./bevangelista-website/Dockerfile -t bkevangelista/personal-website-frontend:latest
+      - name: Push Image to Docker Hub
+        run: |
+          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
+          docker push bkevangelista/personal-website-frontend:latest
