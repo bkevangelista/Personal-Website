@@ -1,0 +1,16 @@
+services:
+  frontend:
+    build: 
+      context: .
+      dockerfile: Dockerfile 
+    ports:
+      - "3000:3000"
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /code
+    volumes:
+      - ./:/bevangelista-website
+      - /bevangelista-website/node_modules
+    command: "npm start"
