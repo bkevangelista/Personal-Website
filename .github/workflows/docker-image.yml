@@ -3,11 +3,6 @@ on:
   push:
     branches:
     - 'feat/ghaSetup'
-    paths:
-    - 'bevangelista-website/Dockerfile'
-  pull_request:
-    paths:
-    - 'bevangelista-website/Dockerfile'
 
 jobs:
   publish_images:
