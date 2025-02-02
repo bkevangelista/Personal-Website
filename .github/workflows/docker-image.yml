@@ -2,7 +2,14 @@ name: Build and Publish Image to Docker Hub
 on:
   push:
     branches:
-    - 'feat/ghaSetup'
+    - '**'
+    paths:
+      - 'bevangelista-website/Dockerfile'
+  pull_request:
+    branches:
+    - '**'
+    paths:
+      - 'bevangelista-website/Dockerfile'
 
 jobs:
   publish_images:
