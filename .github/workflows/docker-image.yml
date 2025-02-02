@@ -2,14 +2,10 @@ name: Build and Publish Image to Docker Hub
 on:
   push:
     branches:
-    - '**'
-    paths:
-      - 'bevangelista-website/Dockerfile'
+    - 'main'
   pull_request:
     branches:
-    - '**'
-    paths:
-      - 'bevangelista-website/Dockerfile'
+    - 'main'
 
 jobs:
   publish_images:
