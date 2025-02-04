@@ -1,13 +1,13 @@
 services:
   frontend:
     build: 
-      context: .
-      dockerfile: Dockerfile 
+      context: ./bevangelista-website
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     develop:
       watch:
         - action: sync
-          path: .
+          path: bevangelista-website
           target: /code
     command: "npm start"

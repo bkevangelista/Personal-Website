@@ -2,7 +2,7 @@
 FROM node:23-alpine
 
 # Set the working directory
-WORKDIR /bevangelista-website
+WORKDIR /app
 
 # Copy the package.json and package-lock.json files
 COPY package*.json ./
