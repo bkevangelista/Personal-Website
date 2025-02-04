@@ -10,7 +10,4 @@ services:
         - action: sync
           path: .
           target: /code
-    volumes:
-      - ./:/bevangelista-website
-      - /bevangelista-website/node_modules
     command: "npm start"
