@@ -20,4 +20,4 @@ services:
     env_file:
       - ./backend/.env
     environment:
-      - GCP_API_KEY=AIzaSyCQA0Ya2YqWmo9P8O8Wh2RVUf72BSOvCZ0
+      - GCP_API_KEY=${GCP_API_KEY}
