@@ -11,11 +11,19 @@ jobs:
   publish_images:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout Code
         uses: actions/checkout@v4
+      - name: Create .env File
+        run: |
+          echo "GCP_API_KEY=${{ secrets.GCP_API_KEY }} > .env
+          echo "GCP_PROJECT_ID="be-personal-website" >> .env
+          echo "GCP_BUCKET_NAME="be-website-public" >> .env
       - name: Build Image
-        run: docker build ./bevangelista-website/ -t bkevangelista/personal-website-frontend:latest
+        run: |
+          docker build ./bevangelista-website/ -t bkevangelista/personal-website-frontend:latest
+          docker build ./backend/ -t bkevangelista/personal-website-backend:latest
       - name: Push Image to Docker Hub
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
           docker push bkevangelista/personal-website-frontend:latest
+          docker push bkevangelista/personal-website-backend:latest
