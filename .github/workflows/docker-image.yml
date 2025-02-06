@@ -1,12 +1,6 @@
 name: Build and Publish Image to Docker Hub
 
 on:
-  push:
-    branches:
-      - 'main'
-  pull_request:
-    branches:
-      - 'main'
   workflow_dispatch:
 
 jobs:

@@ -18,7 +18,7 @@ jobs:
           curl -X POST \
             -H "Authorization: token ${{ secrets.GHA_TOKEN }}" \
             -d '{"ref":"main"}' \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/docker-image.yml/dispatches
+            https://api.github.com/repos/bkevangelista/Personal-Website/actions/workflows/docker-image.yml/dispatches
 
   run-tests:
     runs-on: ubuntu-latest
@@ -29,4 +29,4 @@ jobs:
           curl -X POST \
             -H "Authorization: token ${{ secrets.GHA_TOKEN }}" \
             -d '{"ref":"main"}' \
-            https://api.github.com/repos/${{ github.repository }}/actions/workflows/run-tests.yml/dispatches
+            https://api.github.com/repos/bkevangelista/Personal-Website/actions/workflows/run-tests.yml/dispatches
