@@ -13,7 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build and Publish Image to Docker Hub
-        uses: peter-evans/workflow-dispatch@v1
         with:
           workflow: 'docker-image.yml'
           ref: 'main'
@@ -23,7 +22,6 @@ jobs:
     needs: publish_images
     steps:
       - name: Run Tests After Docker Build
-        uses: peter-evans/workflow-dispatch@v1
         with:
           workflow: 'run-tests.yml'
           ref: 'main'
