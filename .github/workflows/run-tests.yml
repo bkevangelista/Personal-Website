@@ -2,7 +2,7 @@ name: Run Tests After Docker Build
 
 on:
   workflow_run:
-    workflows: ["Build and Push Docker Images"]  # The name of the previous workflow
+    workflows: "Build and Publish Image to Docker Hub"
     types:
       - completed
 
