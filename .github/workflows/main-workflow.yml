@@ -10,7 +10,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_images:
+  build_images_test_and_publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -23,14 +23,9 @@ jobs:
           echo "GCP_PROJECT_ID=be-personal-website" >> .env
           echo "GCP_BUCKET_NAME=be-website-public" >> .env
 
-      - name: Build and Run Containers
+      - name: Build, Test, and Run Containers
         run: docker compose up -d --build
 
-  publish_images:
-    runs-on: ubuntu-latest
-    needs: build_images
-
-    steps:
       - name: Push Image to Docker Hub
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
