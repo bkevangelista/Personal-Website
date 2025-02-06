@@ -47,7 +47,7 @@ jobs:
 
       - name: Wait for Backend to Be Healthy
         run: |
-          docker inspect --format='{{.State.Health.Status}}' personal-website-backend | grep -q "healthy"
+          docker inspect --format='{{.State.Health.Status}}' personal-website-backend-1 | grep -q "healthy"
           if [ $? -ne 0 ]; then
             echo "Backend service is not healthy!"
             exit 1

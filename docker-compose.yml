@@ -22,7 +22,7 @@ services:
     environment:
       - GCP_API_KEY=${GCP_API_KEY}
     healthcheck:
-      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]  # Example health endpoint
+      test: [ "CMD", "curl", "-f", "http://localhost:8000/health" ]
       interval: 30s
       retries: 5
       start_period: 10s
