@@ -24,11 +24,18 @@ jobs:
           echo "GCP_BUCKET_NAME=be-website-public" >> .env
 
       - name: Build Images
-        run: docker-compose up -d --build
+        run: |
+          docker build ./bevangelista-website/ -t bkevangelista/personal-website-frontend:latest
+          docker build ./backend/ -t bkevangelista/personal-website-backend:latest
+
+      - name: Run Containers
+        run: |
+          docker run -d --name personal-website-frontend bkevangelista/personal-website-backend:latest
+          docker run -d --name personal-website-backend bkevangelista/personal-website-backend:latest
 
       - name: Run Health Checks
         run: |
-          docker inspect --format='{{.State.Health.Status}}' personal-website-backend-1 | grep -q "healthy"
+          docker inspect --format='{{.State.Health.Status}}' personal-website-backend | grep -q "healthy"
           if [ $? -ne 0 ]; then
             echo "Backend service is not healthy!"
             exit 1
