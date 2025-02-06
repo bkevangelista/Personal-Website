@@ -23,8 +23,10 @@ jobs:
           echo "GCP_PROJECT_ID=be-personal-website" >> .env
           echo "GCP_BUCKET_NAME=be-website-public" >> .env
 
-      - name: Build, Test, and Run Containers
-        run: docker compose up -d --build
+      - name: Build and Test Containers
+        run: |
+          docker build ./bevangelista-website/ -t bkevangelista/personal-website-frontend:latest
+          docker build ./backend/ -t bkevangelista/personal-website-backend:latest
 
       - name: Push Image to Docker Hub
         run: |
