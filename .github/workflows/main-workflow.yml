@@ -24,7 +24,7 @@ jobs:
     needs: publish_images
     steps:
       - name: Run Tests After Docker Build
-        runs: |
+        run: |
           curl -X POST \
             -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
             -d '{"ref":"main"}' \
