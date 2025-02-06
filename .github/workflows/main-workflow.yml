@@ -15,7 +15,7 @@ jobs:
       - name: Build and Publish Image to Docker Hub
         run: |
           curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.GHA_TOKEN }}" \
             -d '{"ref":"main"}' \
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/docker-image.yml/dispatches
 
@@ -26,6 +26,6 @@ jobs:
       - name: Run Tests After Docker Build
         run: |
           curl -X POST \
-            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Authorization: token ${{ secrets.GHA_TOKEN }}" \
             -d '{"ref":"main"}' \
             https://api.github.com/repos/${{ github.repository }}/actions/workflows/run-tests.yml/dispatches
