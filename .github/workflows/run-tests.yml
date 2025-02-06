@@ -1,0 +1,32 @@
+name: Run Tests After Docker Build
+
+on:
+  workflow_run:
+    workflows: ["Build and Push Docker Images"]  # The name of the previous workflow
+    types:
+      - completed
+
+jobs:
+  run-tests:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set Up Docker Compose
+        run: docker compose up -d --build
+
+      - name: Wait for Backend to Be Healthy
+        run: |
+            docker inspect --format='{{.State.Health.Status}}' backend | grep -q "Health check returned successful response!"
+            if [ $? -ne 0 ]; then
+              echo "Backend service is not healthy!"
+              exit 1
+            fi
+
+      - name: Run Tests
+        run: docker compose exec -T backend pytest tests/ --disable-warnings
+
+      - name: Stop Docker Containers
+        run: docker compose down
