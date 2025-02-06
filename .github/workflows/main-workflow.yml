@@ -13,15 +13,19 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Build and Publish Image to Docker Hub
-        with:
-          workflow: 'docker-image.yml'
-          ref: 'main'
+        run: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d '{"ref":"main"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/docker-image.yml/dispatches
 
   run-tests:
     runs-on: ubuntu-latest
     needs: publish_images
     steps:
       - name: Run Tests After Docker Build
-        with:
-          workflow: 'run-tests.yml'
-          ref: 'main'
+        runs: |
+          curl -X POST \
+            -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" \
+            -d '{"ref":"main"}' \
+            https://api.github.com/repos/${{ github.repository }}/actions/workflows/run-tests.yml/dispatches
