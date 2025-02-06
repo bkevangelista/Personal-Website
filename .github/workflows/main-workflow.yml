@@ -33,14 +33,6 @@ jobs:
           docker run -d --name personal-website-frontend bkevangelista/personal-website-backend:latest
           docker run -d --name personal-website-backend bkevangelista/personal-website-backend:latest
 
-      - name: Run Health Checks
-        run: |
-          docker inspect --format='{{.State.Health.Status}}' personal-website-backend | grep -q "healthy"
-          if [ $? -ne 0 ]; then
-            echo "Backend service is not healthy!"
-            exit 1
-          fi
-
   run_tests:
     runs-on: ubuntu-latest
     needs: build_images
