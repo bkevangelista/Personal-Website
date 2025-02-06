@@ -1,12 +1,5 @@
 name: Run Tests After Docker Build
 
-on:
-  workflow_run:
-    workflows:
-      - "Build and Publish Image to Docker Hub"
-    types:
-      - completed
-
 jobs:
   run-tests:
     runs-on: ubuntu-latest
