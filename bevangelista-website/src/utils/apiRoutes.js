@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:8000";
+const API_URL = process.env.NEXT_PUBLIC_BACKEND_API_URL;
 
 const routes = {
     listFiles: `${API_URL}/external/gcp/cloudStorage/list`,
