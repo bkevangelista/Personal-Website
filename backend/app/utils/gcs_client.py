@@ -32,10 +32,8 @@ def get_file_from_bucket(file_name: str, prefix: Optional[str] = None):
     response = requests.get(url, params=params, stream=True)
     response.raise_for_status()
 
-    print(response)
-
     content_type = response.headers.get("Content-Type", "application/octet-stream")
-    headers = {"Content-Disposition": f"attachment; filename={file_name}"}
+    headers = {"Content-Disposition": f"attachment; filename=\"{file_name}\""}
 
     return Response(
         content=response.content,
