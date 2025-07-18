@@ -22,6 +22,7 @@ jobs:
           echo "GCP_API_KEY=${{ secrets.GCP_API_KEY }}" >> .env
           echo "GCP_PROJECT_ID=be-personal-website" >> .env
           echo "GCP_BUCKET_NAME=be-website-public" >> .env
+        working-directory: ${{ github.workspace }}
 
       - name: Build and Test Containers
         run: |
