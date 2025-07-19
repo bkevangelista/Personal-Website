@@ -4,7 +4,10 @@ services:
       - website-network
     build: 
       context: ./bevangelista-website
+      args:
+        NEXT_PUBLIC_BACKEND_API_URL: ${NEXT_PUBLIC_BACKEND_API_URL}
       dockerfile: Dockerfile
+    env_file: ./bevangelista-website/.env
     ports:
       - "8080:8080"
     develop:
