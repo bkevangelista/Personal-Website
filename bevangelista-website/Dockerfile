@@ -16,6 +16,12 @@ COPY . .
 # Expose the application port
 EXPOSE 8080
 
+# Declare build arguments
+ARG NEXT_PUBLIC_BACKEND_API_URL
+
+# Make it available as an environment variable
+ENV NEXT_PUBLIC_BACKEND_API_URL=$NEXT_PUBLIC_BACKEND_API_URL
+
 # Build and Start the application
 RUN npm run build
 CMD ["npm", "start"]
