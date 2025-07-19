@@ -20,6 +20,7 @@ jobs:
       - name: Create .env File
         run: |
           echo "GCP_API_KEY=${{ secrets.GCP_API_KEY }}" >> .env
+          echo "NEXT_PUBLIC_BACKEND_API_URL=${{ secrets.BACKEND_URL }}" >> .env
           echo "GCP_PROJECT_ID=be-personal-website" >> .env
           echo "GCP_BUCKET_NAME=be-website-public" >> .env
         working-directory: ${{ github.workspace }}
