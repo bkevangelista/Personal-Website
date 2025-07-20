@@ -1,13 +1,13 @@
-name: Main Workflow
+name: pull-request.yml
 
 on:
-  push:
+  pull_request:
     branches:
       - 'main'
   workflow_dispatch:
 
 jobs:
-  build_images_test_and_publish:
+  build_images_and_test:
     runs-on: ubuntu-latest
 
     steps:
@@ -26,9 +26,3 @@ jobs:
         run: |
           docker build ./bevangelista-website/ -t bkevangelista/personal-website-frontend:latest
           docker build ./backend/ -t bkevangelista/personal-website-backend:latest
-
-      - name: Push Image to Docker Hub
-        run: |
-          docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_HUB_TOKEN }}
-          docker push bkevangelista/personal-website-frontend:latest
-          docker push bkevangelista/personal-website-backend:latest
