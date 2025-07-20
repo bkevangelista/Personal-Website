@@ -1,6 +1,7 @@
 export const IMAGE_CONSTANTS = Object.freeze({
     MEMOJI_LOGO: "https://storage.googleapis.com/be-website-public/logos/memoji_logo.png",
     INITIALS_LOGO: "https://storage.googleapis.com/be-website-public/logos/initials_logo.png",
+    INITIALS_LOGO_DARK: "https://storage.googleapis.com/be-website-public/logos/initials-logo-dark.png",
     CHICAGO_PIC: "https://storage.googleapis.com/be-website-public/photos/chicago_pic.JPG",
 });
 
@@ -8,9 +9,13 @@ export const ICON = Object.freeze({
     INSTAGRAM: "https://storage.googleapis.com/be-website-public/icons/instagram.svg",
     LINKEDIN: "https://storage.googleapis.com/be-website-public/icons/linkedin.svg",
     GITHUB: "https://storage.googleapis.com/be-website-public/icons/github.svg",
+    GITHUB_WHITE: "https://storage.googleapis.com/be-website-public/icons/github-mark-white.svg",
     DARK_MODE: "https://storage.googleapis.com/be-website-public/icons/dark-mode.svg",
+    LIGHT_MODE: "https://storage.googleapis.com/be-website-public/icons/light-mode.svg",
     BURGER_MENU: "https://storage.googleapis.com/be-website-public/icons/burger-menu.svg",
-    BLACK_X: "https://storage.googleapis.com/be-website-public/icons/black-x.svg"
+    BURGER_MENU_LIGHT: "https://storage.googleapis.com/be-website-public/icons/burger-menu-light.svg",
+    BLACK_X: "https://storage.googleapis.com/be-website-public/icons/black-x.svg",
+    WHITE_X: "https://storage.googleapis.com/be-website-public/icons/white-x.svg",
 });
 
 export const CONTACT = Object.freeze({
