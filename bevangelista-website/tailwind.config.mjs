@@ -10,9 +10,18 @@ const tailwindConfig = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        darkTheme: "#252526"
       },
+      fontFamily: {
+        Outfit: ["Outfit", "sans-serif"],
+        Ovo: ["Ovo", "serif"]
+      },
+      gridTemplateColumns: {
+        "auto": "repeat(auto-fit, minmax(200px, 1fr))"
+      }
     },
   },
+  darkMode: 'selector',
   plugins: [],
 };
 
