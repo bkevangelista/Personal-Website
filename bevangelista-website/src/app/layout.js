@@ -1,15 +1,15 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Outfit, Ovo } from "next/font/google";
 import "./globals.css";
 import {IMAGE_CONSTANTS} from "@/utils/constants/constants";
 
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+const OutfitFont = Outfit({
+    subsets: ["latin"],
+    weight: ["400", "500", "600", "700"]
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const OvoFont = Ovo({
+    subsets: ["latin"],
+    weight: ["400"]
 });
 
 export const metadata = {
@@ -24,7 +24,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${OutfitFont.className} ${OvoFont.className} antialiased`}
       >
         {children}
       </body>
