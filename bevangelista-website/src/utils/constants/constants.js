@@ -3,6 +3,7 @@ export const IMAGE_CONSTANTS = Object.freeze({
     INITIALS_LOGO: "https://storage.googleapis.com/be-website-public/logos/initials_logo.png",
     INITIALS_LOGO_DARK: "https://storage.googleapis.com/be-website-public/logos/initials-logo-dark.png",
     CHICAGO_PIC: "https://storage.googleapis.com/be-website-public/photos/chicago_pic.JPG",
+    SAN_DIEGO_PIC: "https://storage.googleapis.com/be-website-public/photos/san_diego.jpg",
 });
 
 export const ICON = Object.freeze({
@@ -16,6 +17,10 @@ export const ICON = Object.freeze({
     BURGER_MENU_LIGHT: "https://storage.googleapis.com/be-website-public/icons/burger-menu-light.svg",
     BLACK_X: "https://storage.googleapis.com/be-website-public/icons/black-x.svg",
     WHITE_X: "https://storage.googleapis.com/be-website-public/icons/white-x.svg",
+    EDUCATION: "https://storage.googleapis.com/be-website-public/icons/education.svg",
+    EDUCATION_DARK: "https://storage.googleapis.com/be-website-public/icons/education-light.svg",
+    CODE_TAG: "https://storage.googleapis.com/be-website-public/icons/code-tag.svg",
+    CODE_TAG_DARK: "https://storage.cloud.google.com/be-website-public/icons/code-tag-dark.svg",
 });
 
 export const CONTACT = Object.freeze({
