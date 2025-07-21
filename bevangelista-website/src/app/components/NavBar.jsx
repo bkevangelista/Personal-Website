@@ -24,7 +24,7 @@ const NavBar = ({ darkMode, setDarkMode }) => {
                 </a>
                 <ul className="hidden md:flex items-center gap-6 lg:gap-8 rounded-full px-12 py-3 bg-white shadow-sm bg-opacity-50">
                     {[
-                        { href: "", title: "Home" },
+                        { href: "/", title: "Home" },
                         { href: "about", title: "About" },
                         { href: "resume", title: "Resume" },
                     ].map(({ href, title }, index) => (
