@@ -1,8 +1,10 @@
 import React, { useRef } from 'react'
 import Image from "next/image";
-import {CONTACT, ICON, IMAGE_CONSTANTS} from "@/utils/constants/constants";
+import { CONTACT, ICON, IMAGE_CONSTANTS } from "@/utils/constants/constants";
+import { useDarkMode } from "@/context/DarkModeContext";
 
-const NavBar = ({ darkMode, setDarkMode }) => {
+const NavBar = () => {
+    const { darkMode, setDarkMode } = useDarkMode();
     const sideMenuRef = useRef();
 
     const openMenu = () => {
