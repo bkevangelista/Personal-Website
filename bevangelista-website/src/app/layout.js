@@ -1,5 +1,6 @@
 import { Outfit, Ovo } from "next/font/google";
 import "./globals.css";
+import { DarkModeProvider } from "@/context/DarkModeContext";
 import {IMAGE_CONSTANTS} from "@/utils/constants/constants";
 
 const OutfitFont = Outfit({
@@ -26,7 +27,9 @@ export default function RootLayout({ children }) {
       <body
         className={`${OutfitFont.className} ${OvoFont.className} antialiased leading-8 overflow-x-hidden dark:bg-darkTheme dark:text-white`}
       >
-        {children}
+        <DarkModeProvider>
+            {children}
+        </DarkModeProvider>
       </body>
     </html>
   );

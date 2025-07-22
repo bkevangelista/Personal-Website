@@ -1,36 +1,12 @@
 "use client"
 
-import React, {useEffect, useState} from 'react'
 import Image from "next/image";
 import {IMAGE_CONSTANTS, ICON} from "@/utils/constants/constants";
 import NavBar from "@/app/components/NavBar";
+import { useDarkMode } from "@/context/DarkModeContext";
 
 export default function About() {
-    const [darkMode, setDarkMode] = useState(false);
-
-    useEffect(() => {
-        if (
-            localStorage.theme === "darkMode" ||
-            (
-                !("theme" in localStorage) &&
-                window.matchMedia("(prefers-color-scheme: dark)").matches
-            )
-        ) {
-            setDarkMode(true);
-        } else {
-            setDarkMode(false);
-        }
-    }, [])
-
-    useEffect(() => {
-        if (darkMode) {
-            document.documentElement.classList.add("dark");
-            localStorage.theme = 'dark';
-        } else {
-            document.documentElement.classList.remove("dark");
-            localStorage.theme = '';
-        }
-    }, [darkMode])
+    const { darkMode, setDarkMode } = useDarkMode();
 
     const aboutMeCards = [
         {icon: ICON.EDUCATION, iconDark: ICON.EDUCATION_DARK, title: "Education", description: "B.S in Computer Engineering and Minor in Mathematics"},
@@ -39,7 +15,7 @@ export default function About() {
 
     return (
         <>
-            <NavBar darkMode={darkMode} setDarkMode={setDarkMode} />
+            <NavBar />
 
             <div id="about" className="w-full px-[12%] py-10 pt-28 scroll-mt-20">
 
