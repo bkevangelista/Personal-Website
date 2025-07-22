@@ -1,7 +1,7 @@
 import { Outfit, Ovo } from "next/font/google";
 import "./globals.css";
 import { DarkModeProvider } from "@/context/DarkModeContext";
-import {IMAGE_CONSTANTS} from "@/utils/constants/constants";
+import { IMAGE_CONSTANTS } from "@/utils/constants/constants";
 
 const OutfitFont = Outfit({
     subsets: ["latin"],
