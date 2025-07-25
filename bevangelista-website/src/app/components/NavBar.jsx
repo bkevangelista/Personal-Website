@@ -97,7 +97,7 @@ const NavBar = () => {
                     </div>
 
                     {[
-                        { href: "", title: "Home" },
+                        { href: "/", title: "Home" },
                         { href: "about", title: "About" },
                         { href: "resume", title: "Resume" },
                     ].map(({ href, title }, index) => (
