@@ -13,6 +13,7 @@
     "next": "15.2.0-canary.74",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
+    "react-vertical-timeline-component": "^3.5.3",
     "suncalc": "^1.9.0"
   },
   "devDependencies": {

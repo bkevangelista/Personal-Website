@@ -21,6 +21,8 @@ export const ICON = Object.freeze({
     EDUCATION_DARK: "https://storage.googleapis.com/be-website-public/icons/education-light.svg",
     CODE_TAG: "https://storage.googleapis.com/be-website-public/icons/code-tag.svg",
     CODE_TAG_DARK: "https://storage.cloud.google.com/be-website-public/icons/code-tag-dark.svg",
+    AMEX: "https://storage.googleapis.com/be-website-public/icons/amex.svg",
+    AMEX_DARK: "https://storage.googleapis.com/be-website-public/icons/amex-dark.svg",
 });
 
 export const CONTACT = Object.freeze({
