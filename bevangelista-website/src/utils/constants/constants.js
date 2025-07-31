@@ -23,10 +23,16 @@ export const ICON = Object.freeze({
     CODE_TAG_DARK: "https://storage.cloud.google.com/be-website-public/icons/code-tag-dark.svg",
     AMEX: "https://storage.googleapis.com/be-website-public/icons/amex.svg",
     AMEX_DARK: "https://storage.googleapis.com/be-website-public/icons/amex-dark.svg",
+    RESUME_ICON: "https://storage.googleapis.com/be-website-public/icons/resume-icon.svg",
+    RESUME_ICON_DARK: "https://storage.googleapis.com/be-website-public/icons/resume-icon-dark.svg"
 });
 
 export const CONTACT = Object.freeze({
     INSTAGRAM: "https://www.instagram.com/b.kevangelista/",
     LINKEDIN: "https://www.linkedin.com/in/branden-evangelista/",
     GITHUB: "https://github.com/bkevangelista/bkevangelista",
-})
+});
+
+export const DOCUMENTS = Object.freeze({
+    RESUME: "https://storage.googleapis.com/be-website-public/resume/Branden_Evangelista_Resume.pdf",
+});
