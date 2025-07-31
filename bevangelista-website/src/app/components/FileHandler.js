@@ -38,12 +38,14 @@ const FileHandler = (props)  => {
             {(fileType?.includes("pdf") ||
                 fileType?.includes("image") ||
                 fileType?.includes("text")) && (
-                <iframe
-                    src={srcURL}
-                    width={props.width}
-                    height={props.height}
-                >
-                </iframe>
+                    <div className="aspect-[5/6] max-w-[500px] mx-auto">
+                        <iframe
+                            src={srcURL}
+                            className="w-full h-full"
+                            allowFullScreen
+                        >
+                        </iframe>
+                    </div>
             )}
         </div>
     );
