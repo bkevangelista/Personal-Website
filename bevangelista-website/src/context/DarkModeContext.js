@@ -1,6 +1,6 @@
 "use client";
 
-import { createContext, useContext, useEffect, useState } from "react";
+import { createContext, useCallback, useContext, useEffect, useState } from "react";
 import moment from "moment";
 import SunCalc from "suncalc";
 
@@ -28,7 +28,7 @@ export const DarkModeProvider = ({ children }) => {
         });
     }
 
-    const checkIfDarkMode = async () => {
+    const checkIfDarkMode = useCallback(async () => {
         try {
             const { latitude, longitude } = await getUserCoordinates();
             const now = moment().toDate();
@@ -39,7 +39,7 @@ export const DarkModeProvider = ({ children }) => {
             console.error(error.message);
             return false;
         }
-    }
+    }, []);
 
     useEffect(() => {
         async function initDarkMode() {
@@ -57,7 +57,7 @@ export const DarkModeProvider = ({ children }) => {
 
         initDarkMode();
 
-    }, []);
+    }, [checkIfDarkMode]);
 
     useEffect(() => {
         if (darkMode) {
