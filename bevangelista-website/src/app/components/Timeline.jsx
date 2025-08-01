@@ -43,6 +43,24 @@ const Timeline = () => {
 			description: "First internship at American Express",
 		},
 		{
+			date: "August 2021 - April 2022",
+			classElement: "project",
+			icon: (
+				<Image
+					className="w-10 h-10"
+					src={darkMode ? ICON.CODE_TAG_DARK : ICON.CODE_TAG}
+					alt="Project Icon"
+				/>
+			),
+			iconStyle: { background: "rgb(135,33,243)" },
+			title: "Automatic Handle Cleaning System",
+			location: "Gainesville, FL",
+			description:
+				"Senior design project to create a UV-based door handle sanitizing system. Can create an account and access usage statistics of each linked device via UI",
+			techTags: ["React", "TI432 Microprocessor", "C"],
+			sourceCode: "https://github.com/davidhutchins/Automatic-Sanitizing-System",
+		},
+		{
 			date: "May 2022",
 			classElement: "education",
 			icon: (
@@ -75,6 +93,43 @@ const Timeline = () => {
 				"Joined American Express as an Engineer III in the Financial Data Engineering department",
 		},
 		{
+			date: "September 2022",
+			classElement: "project",
+			icon: (
+				<Image
+					className="w-10 h-10"
+					src={darkMode ? ICON.CODE_TAG_DARK : ICON.CODE_TAG}
+					alt="Project Icon"
+				/>
+			),
+			iconStyle: { background: "rgb(135,33,243)" },
+			title: "Fish Can Choose",
+			location: "Phoenix, AZ",
+			description:
+				"An application to have a fish trade stocks. Plans to polish and finalize the project in the future",
+			techTags: ["Python", "OpenCV", "MongoDB"],
+			sourceCode: "https://github.com/bkevangelista/fish-can-code/tree/dev",
+		},
+		{
+			date: "February 2023",
+			classElement: "project",
+			icon: (
+				<Image
+					className="w-10 h-10"
+					src={darkMode ? ICON.CODE_TAG_DARK : ICON.CODE_TAG}
+					alt="Project Icon"
+				/>
+			),
+			iconStyle: { background: "rgb(135,33,243)" },
+			title: "Operation Mel",
+			location: "Phoenix, AZ",
+			description:
+				"A website created as a birthday present. Plans to refactor, optimize, and update the project in the future",
+			techTags: ["React", "Firebase"],
+			website: "https://operation-mel.web.app/",
+			sourceCode: "https://github.com/bkevangelista/A-History-of-Mel",
+		},
+		{
 			date: "April 2024 - Present",
 			classElement: "work",
 			icon: (
@@ -90,6 +145,23 @@ const Timeline = () => {
 			description:
 				"Switched to the Site Reliability Engineering department as an Engineer II",
 		},
+		{
+			date: "July 2025",
+			classElement: "project",
+			icon: (
+				<Image
+					className="w-10 h-10"
+					src={darkMode ? ICON.CODE_TAG_DARK : ICON.CODE_TAG}
+					alt="Project Icon"
+				/>
+			),
+			iconStyle: { background: "rgb(135,33,243)" },
+			title: "bkevangelista.io",
+			location: "Phoenix, AZ",
+			description: "My own personal website",
+			techTags: ["React", "Python", "Docker", "GitHub Actions", "Cloud Storage", "Cloud Run"],
+			sourceCode: "https://github.com/bkevangelista/Personal-Website",
+		},
 	];
 	return (
 		<>
@@ -97,7 +169,18 @@ const Timeline = () => {
 				<VerticalTimeline lineColor={darkMode ? "#fff" : "#000"}>
 					{timelineElements.map(
 						(
-							{ date, classElement, title, icon, iconStyle, location, description },
+							{
+								date,
+								classElement,
+								title,
+								icon,
+								iconStyle,
+								location,
+								description,
+								techTags,
+								website,
+								sourceCode,
+							},
 							index
 						) => (
 							<VerticalTimelineElement
@@ -125,6 +208,18 @@ const Timeline = () => {
 										: "7px solid #EFF6FF",
 								}}
 							>
+								{techTags && techTags.length > 0 && (
+									<div className="flex flex-wrap gap-2 mt-2">
+										{techTags.map((techStack, index) => (
+											<span
+												key={index}
+												className="dark:!text-white bg-gray-400 dark:bg-[#FFFFFF80] text-sm px-3 py-1 rounded-full"
+											>
+												{techStack}
+											</span>
+										))}
+									</div>
+								)}
 								<h3 className="my-4 font-semibold text-gray-700 dark:!text-white">
 									{title}
 								</h3>
@@ -134,6 +229,30 @@ const Timeline = () => {
 								<p className="text-gray-600 text-sm dark:!text-white">
 									{description}
 								</p>
+								{(website || sourceCode) && (
+									<div className="flex gap-4 mt-4">
+										{website && (
+											<a
+												href={website}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="px-4 py-2 border border-gray-500 cursor-pointer hover:bg-lightHover hover:-translate-y-0.5 duration-500 hover:shadow-lightShadow dark:border-white dark:hover:shadow-darkShadow dark:hover:bg-darkHover/50"
+											>
+												Visit Website
+											</a>
+										)}
+										{sourceCode && (
+											<a
+												href={sourceCode}
+												target="_blank"
+												rel="noopener noreferrer"
+												className="px-4 py-2 border border-gray-500 cursor-pointer hover:bg-lightHover hover:-translate-y-0.5 duration-500 hover:shadow-lightShadow dark:border-white dark:hover:shadow-darkShadow dark:hover:bg-darkHover/50"
+											>
+												View Source Code
+											</a>
+										)}
+									</div>
+								)}
 							</VerticalTimelineElement>
 						)
 					)}
