@@ -1,54 +1,49 @@
 "use client";
 
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import apiRoutes from "@/utils/apiRoutes";
 
-const FileHandler = (props)  => {
-    const [fileURL, setFileURL] = useState(null);
-    const [fileType, setFileType] = useState(null);
-    const [error, setError] = useState(null);
+const FileHandler = (props) => {
+	const [fileURL, setFileURL] = useState(null);
+	const [fileType, setFileType] = useState(null);
+	const [error, setError] = useState(null);
 
-    const downloadFile = async (fileName, prefix) => {
-        try {
-            const response = await fetch(apiRoutes.getFile(fileName, prefix));
-            const blob = await response.blob();
+	const downloadFile = async (fileName, prefix) => {
+		try {
+			const response = await fetch(apiRoutes.getFile(fileName, prefix));
+			const blob = await response.blob();
 
-            const url = URL.createObjectURL(blob);
+			const url = URL.createObjectURL(blob);
 
-            setFileURL(url);
-            setFileType(blob.type);
-        } catch(error) {
-            console.error("Could not download file: ", error);
-            setError(error.message);
-            throw error;
-        }
-    }
+			setFileURL(url);
+			setFileType(blob.type);
+		} catch (error) {
+			console.error("Could not download file: ", error);
+			setError(error.message);
+			throw error;
+		}
+	};
 
-    useEffect(() => {
-        downloadFile(props.fileName, props.prefix);
-    }, [props.fileName, props.prefix]);
+	useEffect(() => {
+		downloadFile(props.fileName, props.prefix);
+	}, [props.fileName, props.prefix]);
 
-    if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
-    if (!fileURL) return <p>Loading file...</p>;
+	if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
+	if (!fileURL) return <p>Loading file...</p>;
 
-    const srcURL = `${fileURL}#toolbar=0`
+	const srcURL = `${fileURL}#toolbar=0`;
 
-    return (
-        <div>
-            {(fileType?.includes("pdf") ||
-                fileType?.includes("image") ||
-                fileType?.includes("text")) && (
-                    <div className="aspect-[5/6] max-w-[500px] mx-auto">
-                        <iframe
-                            src={srcURL}
-                            className="w-full h-full"
-                            allowFullScreen
-                        >
-                        </iframe>
-                    </div>
-            )}
-        </div>
-    );
-}
+	return (
+		<div>
+			{(fileType?.includes("pdf") ||
+				fileType?.includes("image") ||
+				fileType?.includes("text")) && (
+				<div className="aspect-[5/6] max-w-[500px] mx-auto">
+					<iframe src={srcURL} className="w-full h-full" allowFullScreen></iframe>
+				</div>
+			)}
+		</div>
+	);
+};
 
 export default FileHandler;
