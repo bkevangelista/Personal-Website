@@ -1,30 +1,30 @@
 {
-  "name": "bevangelista-website",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev --turbopack -p 8080",
-    "build": "next build",
-    "start": "next start -p 8080",
-    "lint": "next lint",
-    "format": "prettier --write ."
-  },
-  "dependencies": {
-    "@tailwindcss/aspect-ratio": "^0.4.2",
-    "moment": "^2.30.1",
-    "next": "15.2.0-canary.74",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-vertical-timeline-component": "^3.5.3",
-    "suncalc": "^1.9.0"
-  },
-  "devDependencies": {
-    "@eslint/eslintrc": "^3",
-    "eslint": "^9",
-    "eslint-config-next": "15.2.0-canary.74",
-    "eslint-config-prettier": "^10.1.8",
-    "postcss": "^8",
-    "prettier": "^3.6.2",
-    "tailwindcss": "^3.4.1"
-  }
+	"name": "bevangelista-website",
+	"version": "0.1.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev --turbopack -p 8080",
+		"build": "next build",
+		"start": "next start -p 8080",
+		"lint": "next lint",
+		"format": "prettier --write ."
+	},
+	"dependencies": {
+		"@tailwindcss/aspect-ratio": "^0.4.2",
+		"moment": "^2.30.1",
+		"next": "15.2.0-canary.74",
+		"react": "^19.0.0",
+		"react-dom": "^19.0.0",
+		"react-vertical-timeline-component": "^3.5.3",
+		"suncalc": "^1.9.0"
+	},
+	"devDependencies": {
+		"@eslint/eslintrc": "^3",
+		"eslint": "^9",
+		"eslint-config-next": "15.2.0-canary.74",
+		"eslint-config-prettier": "^10.1.8",
+		"postcss": "^8",
+		"prettier": "^3.6.2",
+		"tailwindcss": "^3.4.1"
+	}
 }
