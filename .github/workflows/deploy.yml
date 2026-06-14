@@ -1,0 +1,72 @@
+name: Deploy to Cloud Run
+
+on:
+  workflow_dispatch:
+
+env:
+  PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }}
+  REGION: ${{ secrets.GCP_REGION }}
+  REPOSITORY: web-images
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
+
+    steps:
+      - name: Checkout Repo
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+
+      - name: Setup gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: Configure Docker auth
+        run: gcloud auth configure-docker $REGION-docker.pkg.dev
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Build Backend Image
+        run: |
+          docker buildx build \
+            --platform linux/amd64 \
+            -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/backend:${{ github.sha }} \
+            ./backend \
+            --push
+
+      - name: Build Frontend image
+        run: |
+          docker buildx build \
+            --platform linux/amd64 \
+            --build-arg NEXT_PUBLIC_BACKEND_API_URL=${{ secrets.NEXT_PUBLIC_BACKEND_API_URL }} \
+            -t $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/frontend:${{ github.sha }} \
+            ./bevangelista-website \
+            --push
+
+      - name: Deploy Backend
+        run: |
+          gcloud run deploy backend-service \
+            --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/backend:${{ github.sha }} \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated
+
+      - name: Deploy Frontend
+        run: |
+          gcloud run deploy frontend-service \
+            --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/frontend:${{ github.sha }} \
+            --region $REGION \
+            --platform managed \
+            --allow-unauthenticated
