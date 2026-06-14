@@ -1,27 +1,36 @@
-# Use an official node image as the base (Node version 20)
-FROM node:24-alpine
+# Install dependencies
+FROM node:24-alpine AS deps
 
-# Set the working directory
 WORKDIR /app
 
-# Copy the package.json and package-lock.json files
 COPY package*.json ./
+RUN npm ci
 
-# Install the dependencies
-RUN npm install
+# Build App
+FROM node:24-alpine AS builder
 
-# Copy the rest of the application code
+WORKDIR /app
+
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-# Expose the application port
-EXPOSE 8080
-
-# Declare build arguments
 ARG NEXT_PUBLIC_BACKEND_API_URL
-
-# Make it available as an environment variable
 ENV NEXT_PUBLIC_BACKEND_API_URL=$NEXT_PUBLIC_BACKEND_API_URL
 
-# Build and Start the application
 RUN npm run build
-CMD ["npm", "start"]
+
+# Run container
+FROM node:24-alpine AS runner
+
+WORKDIR /app
+ENV NODE_ENV=production
+ENV PORT=8080
+
+COPY --from=builder /app/.next/standalone ./
+COPY --from=builder /app/.next/static ./.next/static
+COPY --from=builder /app/public ./public
+COPY --from=builder /app/next.config.mjs ./next.config.mjs
+
+EXPOSE 8080
+
+CMD ["node", "server.js"]
