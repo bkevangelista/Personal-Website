@@ -90,7 +90,7 @@ const Timeline = () => {
 			title: "SWE - Financial Data Engineering",
 			location: "Phoenix, AZ",
 			description:
-				"Joined American Express as an Engineer III in the Financial Data Engineering department",
+				"Joined American Express as an Engineer I in the Financial Data Engineering department",
 		},
 		{
 			date: "September 2022",
@@ -140,10 +140,10 @@ const Timeline = () => {
 				/>
 			),
 			iconStyle: { background: "rgb(33, 150, 243)" },
-			title: "SWE - Production Management & Engineering",
+			title: "SWE - Site Reliability Engineering & Application Support",
 			location: "Phoenix, AZ",
 			description:
-				"Switched to the Site Reliability Engineering department as an Engineer II",
+				"Switched to the SRE & AS department as an Engineer II",
 		},
 		{
 			date: "July 2025",

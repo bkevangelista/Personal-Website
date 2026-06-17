@@ -20,7 +20,6 @@ const FileHandler = (props) => {
 		} catch (error) {
 			console.error("Could not download file: ", error);
 			setError(error.message);
-			throw error;
 		}
 	};
 
@@ -39,7 +38,12 @@ const FileHandler = (props) => {
 				fileType?.includes("image") ||
 				fileType?.includes("text")) && (
 				<div className="aspect-[5/6] max-w-[500px] mx-auto">
-					<iframe src={srcURL} className="w-full h-full" allowFullScreen></iframe>
+					<iframe
+						title="file-preview"
+						src={srcURL}
+						className="w-full h-full"
+						allowFullScreen
+					></iframe>
 				</div>
 			)}
 		</div>
