@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import NavBar from "./NavBar";
+import NavBar from "@/app/components/NavBar";
 import { useDarkMode } from "@/context/DarkModeContext";
 
 jest.mock("next/image", () => {
@@ -57,4 +57,26 @@ test("uses dark logo in dark mode", () => {
 	const logo = screen.getByAltText("NavBar logo");
 
 	expect(logo).toBeInTheDocument();
+});
+
+test("opens mobile menu when burger menu clicked", () => {
+	renderNavBar();
+
+	const openButton = screen.getByTestId("open-menu");
+	const mobileMenu = screen.getByTestId("mobile-menu");
+
+	fireEvent.click(openButton);
+
+	expect(mobileMenu.style.transform).toBe("translateX(-16rem)");
+});
+
+test("closes mobile menu when close button clicked", () => {
+	renderNavBar();
+
+	const closeButton = screen.getByTestId("close-menu");
+	const mobileMenu = screen.getByTestId("mobile-menu");
+
+	fireEvent.click(closeButton);
+
+	expect(mobileMenu.style.transform).toBe("translateX(16rem)");
 });

@@ -91,7 +91,11 @@ const NavBar = () => {
 							</a>
 						</li>
 					</ul>
-					<button className="block md:hidden ml-3" onClick={openMenu}>
+					<button
+						data-testid="open-menu"
+						className="block md:hidden ml-3"
+						onClick={openMenu}
+					>
 						<Image
 							src={darkMode ? ICON.BURGER_MENU_LIGHT : ICON.BURGER_MENU}
 							alt="Burger Menu"
@@ -102,10 +106,15 @@ const NavBar = () => {
 
 				{/*    Create Menu for mobile users    */}
 				<ul
+					data-testid="mobile-menu"
 					ref={sideMenuRef}
 					className="flex md:hidden flex-col gap-4 px-10 py-20 fixed -right-64 top-0 bottom-0 w-64 z-50 h-screen bg-blue-50 dark:bg-[#3E3E40] transition duration-500"
 				>
-					<div className="absolute right-6 top-6" onClick={closeMenu}>
+					<div
+						data-testid="close-menu"
+						className="absolute right-6 top-6"
+						onClick={closeMenu}
+					>
 						<Image
 							src={darkMode ? ICON.WHITE_X : ICON.BLACK_X}
 							alt="Close Menu"
