@@ -16,6 +16,15 @@ const customJestConfig = {
 	moduleNameMapper: {
 		"^@/(.*)$": "<rootDir>/src/$1",
 	},
+
+	coverageThreshold: {
+		global: {
+			branches: 90,
+			functions: 90,
+			lines: 90,
+			statements: 90,
+		},
+	},
 };
 
 module.exports = createJestConfig(customJestConfig);
