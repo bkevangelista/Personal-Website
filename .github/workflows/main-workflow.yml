@@ -34,7 +34,11 @@ jobs:
 
       - name: Test Backend
         working-directory: ./backend
-        run: pytest tests/
+        run: |
+          pytest tests/ \
+            --cov=. \
+            --cov-report=term-missing \
+            --cov-fail-under=90
 
   test_frontend:
     runs-on: ubuntu-latest

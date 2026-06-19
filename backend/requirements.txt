@@ -3,5 +3,6 @@ uvicorn
 requests
 python-dotenv
 pytest
+pytest-cov
 httpx
 urllib3
