@@ -151,7 +151,7 @@ jobs:
             --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/backend:${{ github.sha }} \
             --region $REGION \
             --allow-unauthenticated \
-            --set-env-vars GCP_API_KEY=${{ secrets.GCP_API_KEY }}
+            --set-secrets GCP_API_KEY=GCP_API_KEY:latest
 
       - name: Deploy Frontend
         run: |
