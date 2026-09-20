@@ -17,6 +17,10 @@ jobs:
   test_backend:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -31,6 +35,13 @@ jobs:
         run: |
           pip install --upgrade pip
           pip install -r requirements.txt
+
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          create_credentials_file: true
 
       - name: Test Backend
         working-directory: ./backend
@@ -151,7 +162,6 @@ jobs:
             --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/backend:${{ github.sha }} \
             --region $REGION \
             --allow-unauthenticated \
-            --set-secrets GCP_API_KEY=GCP_API_KEY:latest
 
       - name: Deploy Frontend
         run: |

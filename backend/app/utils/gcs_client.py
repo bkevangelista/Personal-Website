@@ -1,35 +1,25 @@
 import requests
+import datetime
 from typing import Optional
-from app.core.config import Config
 from fastapi import FastAPI, Response
-import urllib.parse
+from google.cloud import storage
 
 app = FastAPI()
 
-BASE_URL = "https://storage.googleapis.com"
+def _get_storage_client():
+    return storage.Client()
 
-def list_bucket_files() -> list[str]:
-    """
-    Fetches a list of files in a folder (prefix) in a GCS bucket.
-    If no prefix is provided, lists all files in the bucket.
-    """
-    url = f"{BASE_URL}/storage/v1/b/{Config.GCP_BUCKET_NAME}/o"
-    params = { "key": Config.GCP_API_KEY }
+def list_bucket_files(bucket_name: str = "be-website-public") -> list[str]:
+    storage_client = _get_storage_client()
+    bucket = storage_client.bucket(bucket_name)
+    blobs = bucket.list_blobs()
 
-    response = requests.get(url, params=params)
-    response.raise_for_status()
+    return [blob._properties for blob in blobs]
 
-    return response.json().get("items", [])
+def get_file_from_bucket(bucket_name: str, file_name: str, prefix: Optional[str] = None):
+    url = get_presigned_url_from_bucket(bucket_name, file_name, prefix)
 
-def get_file_from_bucket(file_name: str, prefix: Optional[str] = None):
-    path_to_file = f"{prefix}/{file_name}" if prefix is not None else file_name
-    encoded_path = urllib.parse.quote(path_to_file, safe="")
-
-    url = f"{BASE_URL}/download/storage/v1/b/{Config.GCP_BUCKET_NAME}/o/{encoded_path}?alt=media"
-
-    params = { "key": Config.GCP_API_KEY }
-
-    response = requests.get(url, params=params, stream=True)
+    response = requests.get(url, stream=True)
     response.raise_for_status()
 
     content_type = response.headers.get("Content-Type", "application/octet-stream")
@@ -39,4 +29,15 @@ def get_file_from_bucket(file_name: str, prefix: Optional[str] = None):
         content=response.content,
         media_type=content_type,
         headers=headers
+    )
+
+def get_presigned_url_from_bucket(bucket_name: str, file_name: str, prefix: Optional[str] = None):
+    storage_client = _get_storage_client()
+    bucket = storage_client.bucket(bucket_name)
+    blob = bucket.blob(f"{prefix}/{file_name}")
+
+    return blob.generate_signed_url(
+        version="v4",
+        expiration=datetime.timedelta(minutes=15),
+        method="GET",
     )

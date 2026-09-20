@@ -24,10 +24,10 @@ services:
       dockerfile: Dockerfile
     ports:
       - "8000:8080"
-    env_file:
-      - ./backend/.env
+    volumes:
+      - ${GCP_KEY_PATH}:/app/gcp_key.json
     environment:
-      - GCP_API_KEY=${GCP_API_KEY}
+      - GOOGLE_APPLICATION_CREDENTIALS=/app/gcp_key.json
     healthcheck:
       test: [ "CMD", "curl", "-f", "http://localhost:8080/health" ]
       interval: 30s

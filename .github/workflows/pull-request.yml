@@ -10,6 +10,10 @@ jobs:
   test_backend:
     runs-on: ubuntu-latest
 
+    permissions:
+      contents: read
+      id-token: write
+
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -25,6 +29,13 @@ jobs:
           pip install --upgrade pip
           pip install -r requirements.txt
 
+      - name: Authenticate to GCP
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ secrets.WIF_PROVIDER }}
+          service_account: ${{ secrets.GCP_SERVICE_ACCOUNT }}
+          create_credentials_file: true
+
       - name: Test Backend
         working-directory: ./backend
         run: |
@@ -32,7 +43,6 @@ jobs:
             --cov=. \
             --cov-report=term-missing \
             --cov-fail-under=90
-  
 
   test_frontend:
     runs-on: ubuntu-latest
