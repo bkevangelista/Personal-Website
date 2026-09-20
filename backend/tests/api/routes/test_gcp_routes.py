@@ -35,3 +35,21 @@ def test_get_file(mock_get_file):
 
     assert response.status_code == 200
     assert response.headers["Content-Type"] == "application/json"
+
+@patch("app.api.routes.routes.get_presigned_url_from_bucket")
+def test_get_presigned_url(mock_get_presigned_url_from_bucket):
+    fake_url = "https://googleapis.com..."
+    mock_get_presigned_url_from_bucket.return_value = fake_url
+
+    bucket_name = "be-website-private"
+    file_name = "Branden_Evangelista_Resume.pdf"
+    prefix = "documents"
+
+    url_path = f"/external/gcp/cloudStorage/presignedUrl?bucket_name={bucket_name}&file_name={file_name}&prefix={prefix}"
+
+    response = client.get(url_path)
+
+    assert response.status_code == 200
+    assert response.json() == fake_url
+
+    mock_get_presigned_url_from_bucket.assert_called_once_with(bucket_name, file_name, prefix)

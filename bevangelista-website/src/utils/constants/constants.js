@@ -2,9 +2,7 @@ export const IMAGE_CONSTANTS = Object.freeze({
 	MEMOJI_LOGO: "https://storage.googleapis.com/be-website-public/logos/memoji_logo.png",
 	INITIALS_LOGO: "https://storage.googleapis.com/be-website-public/logos/initials_logo.png",
 	INITIALS_LOGO_DARK:
-		"https://storage.googleapis.com/be-website-public/logos/initials-logo-dark.png",
-	CHICAGO_PIC: "https://storage.googleapis.com/be-website-public/photos/chicago_pic.JPG",
-	SAN_DIEGO_PIC: "https://storage.googleapis.com/be-website-public/photos/san_diego.jpg",
+		"https://storage.googleapis.com/be-website-public/logos/initials-logo-dark.png"
 });
 
 export const ICON = Object.freeze({
@@ -33,8 +31,4 @@ export const CONTACT = Object.freeze({
 	INSTAGRAM: "https://www.instagram.com/b.kevangelista/",
 	LINKEDIN: "https://www.linkedin.com/in/branden-evangelista/",
 	GITHUB: "https://github.com/bkevangelista/bkevangelista",
-});
-
-export const DOCUMENTS = Object.freeze({
-	RESUME: "https://storage.googleapis.com/be-website-public/resume/Branden_Evangelista_Resume.pdf",
 });

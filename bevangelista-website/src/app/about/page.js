@@ -1,11 +1,13 @@
 "use client";
 
 import Image from "next/image";
-import { IMAGE_CONSTANTS, ICON } from "@/utils/constants/constants";
+import { ICON } from "@/utils/constants/constants";
 import NavBar from "@/app/components/NavBar";
 import { useDarkMode } from "@/context/DarkModeContext";
+import { useProfilePic } from "@/app/components/UseProfilePic";
 
 export default function About() {
+	const { profilePicUrl } = useProfilePic("be-website-private","san_diego.jpg", "photos");
 	const { darkMode, setDarkMode } = useDarkMode();
 
 	const aboutMeCards = [
@@ -33,11 +35,13 @@ export default function About() {
 
 				<div className="flex w-full flex-col lg:flex-row items-center gap-20 my-20">
 					<div className="w-64 sm:w-80 rounded-3xl max-w-none">
-						<Image
-							src={IMAGE_CONSTANTS.SAN_DIEGO_PIC}
-							alt="User photo"
-							className="w-full rounded-3xl"
-						/>
+						{profilePicUrl && (
+							<Image
+								src={profilePicUrl}
+								alt="User photo"
+								className="w-full rounded-3xl"
+							/>
+						)}
 					</div>
 					<div className="flex-1">
 						<p className="mb-10 max-w-2xl font-Ovo">

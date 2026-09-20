@@ -2,6 +2,7 @@ from fastapi import APIRouter
 from app.utils.gcs_client import (
     list_bucket_files,
     get_file_from_bucket,
+    get_presigned_url_from_bucket,
 )
 from typing import Optional
 
@@ -30,3 +31,7 @@ def list_files(bucket_name: str = "be-website-public"):
 @router.get(f"{gcpBaseEndpoint}/file")
 def get_file(bucket_name: str, file_name: str, prefix: Optional[str] = None):
     return get_file_from_bucket(bucket_name, file_name, prefix)
+
+@router.get(f"{gcpBaseEndpoint}/presignedUrl")
+def get_presigned_url(bucket_name: str, file_name: str, prefix: Optional[str] = None):
+    return get_presigned_url_from_bucket(bucket_name, file_name, prefix)

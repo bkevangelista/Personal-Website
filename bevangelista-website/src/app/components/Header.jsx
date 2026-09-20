@@ -1,16 +1,20 @@
 import Image from "next/image";
 import React from "react";
-import { IMAGE_CONSTANTS } from "@/utils/constants/constants";
+import { useProfilePic } from "@/app/components/UseProfilePic";
 
 const Header = () => {
+	const { profilePicUrl } = useProfilePic(
+		"be-website-private",
+		"chicago_pic.JPG",
+		"photos"
+	);
+
 	return (
 		<div className="w-11/12 max-w-3xl text-center mx-auto h-screen flex flex-col items-center justify-center gap-4 pt-20">
 			<div>
-				<Image
-					src={IMAGE_CONSTANTS.CHICAGO_PIC}
-					alt="Headshot"
-					className="rounded-full w-32"
-				/>
+				{profilePicUrl && (
+					<Image src={profilePicUrl} alt="Headshot" className="rounded-full w-32" />
+				)}
 			</div>
 			<h3 className="flex items-end gap-2 text-xl md:text-2xl mb-3 font-Ovo">
 				Hi! I'm Branden Evangelista 👋🏽

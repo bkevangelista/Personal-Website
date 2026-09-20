@@ -11,14 +11,22 @@ describe("apiRoutes", () => {
 	test("creates correct listFiles route", async () => {
 		const routes = (await import("@/utils/apiRoutes")).default;
 
-		expect(routes.listFiles).toBe("http://localhost:8080/external/gcp/cloudStorage/list");
+		expect(routes.listFiles("bucket")).toBe("http://localhost:8080/external/gcp/cloudStorage/bucket/bucket");
 	});
 
 	test("creates correct getFile route", async () => {
 		const routes = (await import("@/utils/apiRoutes")).default;
 
-		expect(routes.getFile("resume.pdf", "resume")).toBe(
-			"http://localhost:8080/external/gcp/cloudStorage/get?file_name=resume.pdf&prefix=resume"
+		expect(routes.getFile("bucket", "resume.pdf", "resume")).toBe(
+			"http://localhost:8080/external/gcp/cloudStorage/file?bucket_name=bucket&file_name=resume.pdf&prefix=resume"
+		);
+	});
+
+	test("creates correct getPresignedUrl route", async () => {
+		const routes = (await import("@/utils/apiRoutes")).default;
+
+		expect(routes.getFile("bucket", "resume.pdf", "resume")).toBe(
+			"http://localhost:8080/external/gcp/cloudStorage/presignedUrl?bucket_name=bucket&file_name=resume.pdf&prefix=resume"
 		);
 	});
 });

@@ -8,9 +8,9 @@ const FileHandler = (props) => {
 	const [fileType, setFileType] = useState(null);
 	const [error, setError] = useState(null);
 
-	const downloadFile = async (fileName, prefix) => {
+	const downloadFile = async (bucketName, fileName, prefix) => {
 		try {
-			const response = await fetch(apiRoutes.getFile(fileName, prefix));
+			const response = await fetch(apiRoutes.getFile(bucketName, fileName, prefix));
 			const blob = await response.blob();
 
 			const url = URL.createObjectURL(blob);
@@ -24,8 +24,8 @@ const FileHandler = (props) => {
 	};
 
 	useEffect(() => {
-		downloadFile(props.fileName, props.prefix);
-	}, [props.fileName, props.prefix]);
+		downloadFile(props.bucketName, props.fileName, props.prefix);
+	}, [props.bucketName, props.fileName, props.prefix]);
 
 	if (error) return <p style={{ color: "red" }}>Error: {error}</p>;
 	if (!fileURL) return <p>Loading file...</p>;

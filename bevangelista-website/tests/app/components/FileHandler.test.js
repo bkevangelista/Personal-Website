@@ -19,7 +19,7 @@ test("shows loading state initially", () => {
 		() => new Promise(() => {}) // never resolves
 	);
 
-	render(<FileHandler fileName="resume.pdf" prefix="resume" />);
+	render(<FileHandler bucketName="be-website-private" fileName="resume.pdf" prefix="resume" />);
 
 	expect(screen.getByText("Loading file...")).toBeInTheDocument();
 });
@@ -35,7 +35,7 @@ test("renders iframe when pdf loads successfully", async () => {
 		})
 	);
 
-	render(<FileHandler fileName="resume.pdf" prefix="resume" />);
+	render(<FileHandler bucketName="be-website-private" fileName="resume.pdf" prefix="resume" />);
 
 	const iframe = await screen.findByTitle("file-preview");
 
@@ -48,7 +48,7 @@ test("renders error when download fails", async () => {
 
 	const consoleSpy = jest.spyOn(console, "error").mockImplementation(() => {});
 
-	render(<FileHandler fileName="resume.pdf" prefix="resume" />);
+	render(<FileHandler bucketName="be-website-private" fileName="resume.pdf" prefix="resume" />);
 
 	await waitFor(() => {
 		expect(screen.getByText(/Error:/)).toBeInTheDocument();
@@ -70,7 +70,7 @@ test("does not render iframe for unsupported file type", async () => {
 		})
 	);
 
-	render(<FileHandler fileName="archive.zip" prefix="files" />);
+	render(<FileHandler bucketName="be-website-private" fileName="archive.zip" prefix="files" />);
 
 	await waitFor(() => {
 		expect(screen.queryByText("Loading file...")).not.toBeInTheDocument();
@@ -90,7 +90,7 @@ test("refetches when props change", async () => {
 
 	const { rerender } = render(<FileHandler fileName="a.pdf" prefix="resume" />);
 
-	rerender(<FileHandler fileName="b.pdf" prefix="resume" />);
+	rerender(<FileHandler bucketName="be-website-private" fileName="b.pdf" prefix="resume" />);
 
 	await waitFor(() => {
 		expect(fetch).toHaveBeenCalledTimes(2);

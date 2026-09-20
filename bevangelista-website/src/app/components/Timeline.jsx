@@ -4,8 +4,9 @@ import Image from "next/image";
 import { VerticalTimeline, VerticalTimelineElement } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 import { useDarkMode } from "@/context/DarkModeContext";
-import { DOCUMENTS, ICON } from "@/utils/constants/constants";
+import { ICON } from "@/utils/constants/constants";
 import FileHandler from "@/app/components/FileHandler";
+import apiRoutes from "@/utils/apiRoutes";
 
 const Timeline = () => {
 	const { darkMode, setDarkMode } = useDarkMode();
@@ -278,12 +279,18 @@ const Timeline = () => {
 						</p>
 						<div className="flex flex-col items-center mt-4 gap-4">
 							<FileHandler
+								bucketName="be-website-private"
 								fileName={`Branden_Evangelista_Resume${darkMode ? "_Dark" : ""}.pdf`}
 								prefix="resume"
 							/>
 							<button
 								className="lg:flex items-center px-2.5 py-2.5 border border-gray-500 rounded-full ml-4"
-								onClick={() => window.open(DOCUMENTS.RESUME, "_blank")}
+								onClick={async () => {
+									const response = await fetch(apiRoutes.getPresignedUrl("be-website-private", "Branden_Evangelista_Resume.pdf", "resume"));
+									const url = await response.text();
+									const cleanUrl = url.replace(/^"|"\$/g, "");
+									window.open(cleanUrl, "_blank");
+								}}
 							>
 								<Image
 									src={darkMode ? ICON.RESUME_ICON_DARK : ICON.RESUME_ICON}
