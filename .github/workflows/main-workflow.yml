@@ -161,7 +161,7 @@ jobs:
           gcloud run deploy backend-service \
             --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/backend:${{ github.sha }} \
             --region $REGION \
-            --allow-unauthenticated \
+            --allow-unauthenticated
 
       - name: Deploy Frontend
         run: |

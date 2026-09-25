@@ -98,8 +98,7 @@ jobs:
           gcloud run deploy backend-service \
             --image $REGION-docker.pkg.dev/$PROJECT_ID/$REPOSITORY/backend:${{ github.sha }} \
             --region $REGION \
-            --allow-unauthenticated \
-            --set-secrets GCP_API_KEY=GCP_API_KEY:latest
+            --allow-unauthenticated
 
       - name: Deploy Frontend
         run: |
